@@ -132,7 +132,7 @@ ScriptedImporter:
       y: 35
       width: 60
       height: 3
-    spriteID: a1564313b388d7a43821912b70ef7732
+    spriteID: bcc3b381f19cfa34e9d6a0c702e7e2a8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -152,7 +152,7 @@ ScriptedImporter:
       y: 21
       width: 66
       height: 6
-    spriteID: e3a45cf57cf31b54f8c06c9248a5b51f
+    spriteID: b34ed355a8f06584bacd5c31871af046
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -172,7 +172,7 @@ ScriptedImporter:
       y: 4
       width: 72
       height: 9
-    spriteID: bf059e9486c63eb4fb423ae3183121b4
+    spriteID: 87c7dc82829b99947a0f720743ab860d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -198,7 +198,7 @@ ScriptedImporter:
         y: 0
         width: 60
         height: 3
-      spriteId: a1564313b388d7a43821912b70ef7732
+      spriteId: bcc3b381f19cfa34e9d6a0c702e7e2a8
     - name: PressurePlateUp_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -207,7 +207,7 @@ ScriptedImporter:
         y: 0
         width: 66
         height: 6
-      spriteId: e3a45cf57cf31b54f8c06c9248a5b51f
+      spriteId: b34ed355a8f06584bacd5c31871af046
     - name: PressurePlateUp_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -216,7 +216,7 @@ ScriptedImporter:
         y: 0
         width: 72
         height: 9
-      spriteId: bf059e9486c63eb4fb423ae3183121b4
+      spriteId: 87c7dc82829b99947a0f720743ab860d
     linkedCells: []
     parentIndex: -1
   platformSettings: []
