@@ -436,6 +436,8 @@ MonoBehaviour:
   size: 
   xScale: 1
   yScale: 1
+  maxSize: 0.004
+  minSize: 0.0005
   scaleSpeed: 1
 --- !u!1 &278916426
 GameObject:
@@ -621,6 +623,8 @@ MonoBehaviour:
   size: 
   xScale: 1
   yScale: 1
+  maxSize: 0.004
+  minSize: 0.0005
   scaleSpeed: 1
 --- !u!61 &2119974803
 BoxCollider2D:

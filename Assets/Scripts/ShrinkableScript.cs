@@ -6,13 +6,12 @@ public class ShrinkableScript : MonoBehaviour
 {
     public string size;
 
-    public int xScale;
-    public int yScale;
+  
 
     public float xScale = 1f; // Default value, adjust as needed
     public float yScale = 1f; // Default value, adjust as needed
-    const float maxSize = 2f; // Max size
-    const float minSize = 0.5f; // Min size
+    [SerializeField] public float maxSize = 2f; // Max size
+    [SerializeField] public float minSize = 0.5f; // Min size
     [SerializeField] private float scaleSpeed = 1f; // Speed of scaling
     private Vector3 normalScale;
 
@@ -33,9 +32,6 @@ public class ShrinkableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
         /*if (Input.GetKeyDown(KeyCode.Space))
         {
             if (size == "normal" || size == "large")
@@ -49,22 +45,35 @@ public class ShrinkableScript : MonoBehaviour
                 size = "large";
             }
         }*/
-
-
-    void Shrink()
-    {
-        if (CheckSize())
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P) && size != "large")
         {
-            if (size == "normal" || size == "large")
+
+            if (size.Equals("small"))
             {
-                SetScaling(minSize, 0.5f); // Shrink to minSize
-                size = "small";
+                size = "normal";
+                SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
             }
-            else if (size == "small")
+            else
             {
-                SetScaling(maxSize, 1.5f); // Grow to maxSize
                 size = "large";
+                Vector3 grownScale = new Vector3(maxSize, maxSize, 1f);
+                SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && size != "small")
+        {
+
+            if (size.Equals("large"))
+            {
+                size = "normal";
+                SetScaling(normalScale, 1f);   //shrink back to normal size if grown
+            }
+            else
+            {
+                size = "small";
+                Vector3 shrunkenScale = new Vector3(minSize, minSize, 1f);
+                SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
         }
 
@@ -82,10 +91,17 @@ public class ShrinkableScript : MonoBehaviour
         }
     }
 
-    private void SetScaling(float targetSize, float factor)
+    private void SetScaling(Vector3 targetsize, float factor)
     {
-        targetScale = new Vector3(targetSize, targetSize, 1f);
+        targetScale = targetsize;
         scaling = true;
         scaleFactor = factor;
+    }
+
+    // TODO: come up with algorithm here
+    // if resulting dimensions overlap with other objects/environemnt, return false, else return true
+    private bool CheckSize()
+    {
+        return true;
     }
 }
