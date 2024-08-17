@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    [SerializeField] private float scaleSpeed = 1f;
+    public float xScale = 1f;
+    public float yScale = 1f;
+    const float maxSize = 0.4f;  //Max size
+    const float minSize = 0.1f;
+    private float scaleFactor;
+    private bool scaling = false;
+    private Vector3 targetScale;
+
+    private Vector3 normalScale;
+
     public float movementSpeed = 5f;
     public float jumpForce = 2f;
     private string size;
@@ -21,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         size = "normal";
+        normalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -34,32 +46,47 @@ public class PlayerScript : MonoBehaviour
             hasJumped = true; 
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && !size.Equals("grown"))
+        if (Input.GetKeyDown(KeyCode.P) && size != "grown")
         {
-            Grow();
 
             if (size.Equals("shrunk"))
             {
                 size = "normal";
+                SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
             }
             else
             {
                 size = "grown";
+                Vector3 grownScale = new Vector3(maxSize, maxSize, 1f);
+                SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && !size.Equals("shrunk"))
+        if (Input.GetKeyDown(KeyCode.I) && size != "shrunk")
         {
-            Shrink();
 
             if (size.Equals("grown"))
             {
                 size = "normal";
+                SetScaling(normalScale, 1f);   //shrink back to normal size if grown
             }
             else
             {
                 size = "shrunk";
+                Vector3 shrunkenScale = new Vector3(minSize, minSize, 1f);
+                SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
+        }
+
+        if (scaling)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, scaleSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.localScale, targetScale) < 0.01f) //stops scaling
+            {
+                transform.localScale = targetScale;
+                scaling = false;
+            }
+
         }
     }
 
@@ -73,16 +100,14 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void Shrink()
+    public void SetScaling(Vector3 targetSize, float factor)
     {
-        Vector3 scale = transform.localScale * shrinkFactor;
-        transform.localScale = scale;
-    }
-    public void Grow()
-    {
-        Vector3 scale = transform.localScale * growFactor;
-        transform.localScale = scale;
-    }
+        /*Vector3 scale = transform.localScale * shrinkFactor;
+        transform.localScale = scale;*/
 
+        targetScale = targetSize;
+        scaling = true;
+        scaleFactor = factor;
+    }
 
 }
