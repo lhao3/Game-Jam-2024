@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &997279896
 Animator:
   serializedVersion: 5
@@ -593,7 +593,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: growFactor
-      value: 2
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
+      propertyPath: shrinkFactor
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: movementSpeed
