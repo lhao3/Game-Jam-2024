@@ -171,8 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd47b4164bb7574fbc0f2ef5fe4ec2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 6
   jumpForce: 12
+  shrinkFactor: 0.5
+  growFactor: 2
   floorCollider: {fileID: 2673683364685313543}
   floorFilter:
     useTriggers: 0
