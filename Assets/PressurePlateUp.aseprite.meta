@@ -123,16 +123,16 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: PressurePlateUp_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0.6666667}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
-      width: 72
-      height: 9
-    spriteID: c5f47c760b44e9f408102df5d42d9845
+      y: 35
+      width: 60
+      height: 3
+    spriteID: a1564313b388d7a43821912b70ef7732
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,19 +140,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
+    uvTransform: {x: 4, y: 35}
   - name: PressurePlateUp_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0.33333334}
+    pivot: {x: 0.49999997, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 21
-      width: 72
-      height: 9
-    spriteID: cba3be1fbdb7b3542aaeea5d1bf14d17
+      width: 66
+      height: 6
+    spriteID: e3a45cf57cf31b54f8c06c9248a5b51f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -169,10 +169,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 38
+      y: 4
       width: 72
       height: 9
-    spriteID: 263acb677c7ee2248afc14909adc558f
+    spriteID: bf059e9486c63eb4fb423ae3183121b4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -180,7 +180,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 38}
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -194,20 +194,20 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 3
-        y: -6
-        width: 72
-        height: 9
-      spriteId: c5f47c760b44e9f408102df5d42d9845
+        x: 9
+        y: 0
+        width: 60
+        height: 3
+      spriteId: a1564313b388d7a43821912b70ef7732
     - name: PressurePlateUp_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 3
-        y: -3
-        width: 72
-        height: 9
-      spriteId: cba3be1fbdb7b3542aaeea5d1bf14d17
+        x: 6
+        y: 0
+        width: 66
+        height: 6
+      spriteId: e3a45cf57cf31b54f8c06c9248a5b51f
     - name: PressurePlateUp_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -216,7 +216,7 @@ ScriptedImporter:
         y: 0
         width: 72
         height: 9
-      spriteId: 263acb677c7ee2248afc14909adc558f
+      spriteId: bf059e9486c63eb4fb423ae3183121b4
     linkedCells: []
     parentIndex: -1
   platformSettings: []
