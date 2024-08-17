@@ -4,32 +4,40 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    private float movementSpeed = 5f;
+    public float movementSpeed = 5f;
+    public float jumpForce = 2f;
+    private float horizontalMovement;
+    private Rigidbody2D rb2D;
+    private bool hasJumped = false;
+    private bool isGrounded = false; 
+    public Collider2D floorCollider;
+    public ContactFilter2D floorFilter;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        isGrounded = floorCollider.IsTouching(floorFilter);
+
+        if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
-            transform.position += new Vector3(0, movementSpeed * 5 * Time.deltaTime, 0);
+            hasJumped = true; 
         }
-        if (Input.GetKey(KeyCode.A))
+    }
+
+    private void FixedUpdate()
+    {
+        rb2D.velocity = new Vector2(horizontalMovement * movementSpeed, rb2D.velocity.y);
+        if (hasJumped)
         {
-            transform.position += new Vector3(movementSpeed * Time.deltaTime * -1, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += new Vector3(0, movementSpeed * Time.deltaTime * -1, 0);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += new Vector3(movementSpeed * Time.deltaTime, 0, 0);
+            hasJumped = false;
+            rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 }
