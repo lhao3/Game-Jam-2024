@@ -6,6 +6,9 @@ public class PlayerScript : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public float jumpForce = 2f;
+    private string size;
+    public float shrinkFactor = 0.5f;
+    public float growFactor = 2f;
     private float horizontalMovement;
     private Rigidbody2D rb2D;
     private bool hasJumped = false;
@@ -17,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        size = "normal";
     }
 
     // Update is called once per frame
@@ -29,6 +33,34 @@ public class PlayerScript : MonoBehaviour
         {
             hasJumped = true; 
         }
+
+        if (Input.GetKeyDown(KeyCode.P) && !size.Equals("grown"))
+        {
+            Grow();
+
+            if (size.Equals("shrunk"))
+            {
+                size = "normal";
+            }
+            else
+            {
+                size = "grown";
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && !size.Equals("shrunk"))
+        {
+            Shrink();
+
+            if (size.Equals("grown"))
+            {
+                size = "normal";
+            }
+            else
+            {
+                size = "shrunk";
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -40,4 +72,17 @@ public class PlayerScript : MonoBehaviour
             rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
+
+    public void Shrink()
+    {
+        Vector3 scale = transform.localScale * shrinkFactor;
+        transform.localScale = scale;
+    }
+    public void Grow()
+    {
+        Vector3 scale = transform.localScale * growFactor;
+        transform.localScale = scale;
+    }
+
+
 }
