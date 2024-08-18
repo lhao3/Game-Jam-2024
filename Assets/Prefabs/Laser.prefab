@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layersToHit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!212 &1194932368218399065
 SpriteRenderer:
   m_ObjectHideFlags: 0
