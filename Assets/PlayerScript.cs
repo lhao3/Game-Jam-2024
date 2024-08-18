@@ -102,8 +102,6 @@ public class PlayerScript : MonoBehaviour
 
     public void SetScaling(Vector3 targetSize, float factor)
     {
-        /*Vector3 scale = transform.localScale * shrinkFactor;
-        transform.localScale = scale;*/
 
         targetScale = targetSize;
         scaling = true;
