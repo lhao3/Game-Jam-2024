@@ -6,8 +6,9 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
     [SerializeField] private float laserLength;
+    [SerializeField] public PlayerScript playerScript;
     public LayerMask layersToHit;
-    private Collider2D collided; 
+    private Collider2D collided;
 
     // Start is called before the first frame update
     void Start()
@@ -34,13 +35,15 @@ public class LaserScript : MonoBehaviour
         if (hit.collider.tag == "Shrinkable")
         {
             collided = hit.collider;
-            TriggerShrink();
+            TriggerScaling();
     
         }
-        
+
+
+
     }
 
-    public void TriggerShrink()
+    public void TriggerScaling()
     {
         StartCoroutine(WaitBeforeShrink());
     }
@@ -54,7 +57,15 @@ public class LaserScript : MonoBehaviour
         if (shrinkable != null)
         {
             Debug.Log("shrinking");
-            shrinkable.Shrink();
+            if (playerScript.GetShrinkToggle())
+            {
+                shrinkable.Shrink();
+            }
+            else
+            {
+                shrinkable.Grow();
+            }
+            
         }
     }
 

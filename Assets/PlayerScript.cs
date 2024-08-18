@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -36,6 +37,7 @@ public class PlayerScript : MonoBehaviour
     public ContactFilter2D floorFilter;
     private Vector3 laserPosition;
     private SpriteRenderer laserSprite;
+    public bool shrinkToggle = true;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +102,12 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+           shrinkToggle = !shrinkToggle;
+            Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             bool isFlipped = playerSprite.flipX;
@@ -131,6 +139,11 @@ public class PlayerScript : MonoBehaviour
             {
                 instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
                 instantiatedLaser.transform.right = Vector3.right;
+            }
+
+            if(instantiatedLaser != null)
+            {
+                StartCoroutine(DestroyLaser(instantiatedLaser));
             }
             
         }
@@ -185,5 +198,15 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public bool GetShrinkToggle()
+    {
+        return shrinkToggle;
+    }
+
+    private IEnumerator DestroyLaser(GameObject newLaser)
+    {
+        yield return new WaitForSeconds(0.52f);
+        Destroy(newLaser);
+    }
 
 }
