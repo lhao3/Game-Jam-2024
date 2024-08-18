@@ -31,9 +31,11 @@ public class PlayerScript : MonoBehaviour
     private float horizontalMovement;
     private Rigidbody2D rb2D;
     private bool hasJumped = false;
-    private bool isGrounded = false; 
+    private bool isGrounded = true; 
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
+    private Vector3 laserPosition;
+    private SpriteRenderer laserSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,7 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         size = "normal";
         normalScale = transform.localScale;
+        laserSprite = laser.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -99,9 +102,19 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //var laserOriginTransform = transform;
-            Vector3 laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
-            //Instantiate(laser, laserOriginTransform.TransformPoint(Vector3.forward * 2), transform.rotation);
+            if (playerSprite.flipX)
+            {
+                // laser.transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                laserPosition = new Vector3(transform.position.x - laserX, transform.position.y + laserY, 0);
+                laserSprite.flipX = true;
+            }
+            else
+            {
+                // transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
+                laserSprite.flipX = false; 
+            }
+            //laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
             Instantiate(laser, laserPosition, transform.rotation);
         }
 
@@ -150,10 +163,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            if (collision.contacts[0].normal.y > 0.5f)
-            {
-                isGrounded = false;
-            }
+   
+            isGrounded = false;            
         }
     }
 
