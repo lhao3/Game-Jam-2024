@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] private float scaleSpeed = 1f;
-    [SerializeField] private GameObject laser; 
+    [SerializeField] private GameObject laser;
+    [SerializeField] private SpriteRenderer playerSprite;
+
     public float xScale = 1f;
     public float yScale = 1f;
     const float maxSize = 0.4f;  //Max size
@@ -42,6 +44,17 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            playerSprite.flipX = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            playerSprite.flipX = false; 
+        }
+
         isGrounded = floorCollider.IsTouching(floorFilter);
 
         if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
