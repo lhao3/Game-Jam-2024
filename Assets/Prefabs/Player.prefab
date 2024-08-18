@@ -175,6 +175,9 @@ MonoBehaviour:
   scaleSpeed: 10
   laser: {fileID: 3508488581649257761, guid: c981e773268fd444a814ad468b722ea5, type: 3}
   playerSprite: {fileID: 6291065596087083182}
+  laserSprite: {fileID: 3626916397498700004, guid: 5a75a225fdd589b4388248359e3b2dc9, type: 3}
+  laserX: 0.1
+  laserY: 0.2
   xScale: 1
   yScale: 1
   movementSpeed: 6
@@ -184,7 +187,7 @@ MonoBehaviour:
   floorCollider: {fileID: 2673683364685313543}
   floorFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0

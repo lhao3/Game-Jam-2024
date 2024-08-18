@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,28 +10,32 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float scaleSpeed = 1f;
     [SerializeField] private GameObject laser;
     [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] public float laserX;
+    [SerializeField] public float laserY;
 
     public float xScale = 1f;
     public float yScale = 1f;
-    const float maxSize = 0.4f;  //Max size
-    const float minSize = 0.1f;
+    [SerializeField] const float maxSize = 0.4f;  //Max size
+    [SerializeField] const float minSize = 0.1f;
     private float scaleFactor;
     private bool scaling = false;
     private Vector3 targetScale;
 
     private Vector3 normalScale;
 
-    public float movementSpeed = 5f;
-    public float jumpForce = 2f;
+    [SerializeField] public float movementSpeed = 5f;
+    [SerializeField] public float jumpForce = 2f;
     private string size;
     public float shrinkFactor = 0.5f;
     public float growFactor = 2f;
     private float horizontalMovement;
     private Rigidbody2D rb2D;
     private bool hasJumped = false;
-    private bool isGrounded = false; 
+    private bool isGrounded = true; 
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
+    private Vector3 laserPosition;
+    private SpriteRenderer laserSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +43,7 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         size = "normal";
         normalScale = transform.localScale;
+        laserSprite = laser.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -55,7 +61,7 @@ public class PlayerScript : MonoBehaviour
             playerSprite.flipX = false; 
         }
 
-        isGrounded = floorCollider.IsTouching(floorFilter);
+        //isGrounded = floorCollider.IsTouching(floorFilter);
 
         if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
@@ -96,8 +102,37 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var laserOriginTransform = transform;
-            Instantiate(laser, laserOriginTransform.TransformPoint(Vector3.forward * 2), transform.rotation);
+            bool isFlipped = playerSprite.flipX;
+
+            if (isFlipped)
+            {
+                
+                laserPosition = new Vector3(transform.position.x - laserX, transform.position.y + laserY, 0);
+
+            }
+            else
+            {
+                
+                laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
+ 
+            }
+      
+            GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
+            SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
+
+
+            if (playerSprite.flipX)
+            {
+                instantiatedLaser.transform.localScale = new Vector3(-Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+                instantiatedLaser.transform.right = Vector3.left;
+
+            }
+            else
+            {
+                instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+                instantiatedLaser.transform.right = Vector3.right;
+            }
+            
         }
 
         if (scaling)
@@ -128,6 +163,26 @@ public class PlayerScript : MonoBehaviour
         targetScale = targetSize;
         scaling = true;
         scaleFactor = factor;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            if (collision.contacts[0].normal.y > 0.5f)
+            {
+                isGrounded = true;
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+   
+            isGrounded = false;            
+        }
     }
 
 

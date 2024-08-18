@@ -1,37 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
+    [SerializeField] private float laserLength;
     public LayerMask layersToHit;
+    private Collider2D collided; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //StartCoroutine(DelayScalingStart());
     }
 
     // Update is called once per frame
     void Update()
     {
-        float angle = transform.eulerAngles.z * Mathf.Deg2Rad;
-        Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        Vector2 dir = transform.right;
+        Debug.DrawRay(transform.position, dir * laserLength, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 50f, layersToHit);
-        if(hit.collider == null)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, laserLength, layersToHit);
+        if (hit.collider == null)
         {
             transform.localScale = new Vector3(1f, transform.localScale.y, 1);
             return;
         }
 
         transform.localScale = new Vector3(hit.distance, transform.localScale.y, 1);
-        Debug.Log(hit.collider.gameObject.name);
+        //Debug.Log(hit.collider.gameObject.name);
 
-        if(hit.collider.tag == "Player")
+        if (hit.collider.tag == "Shrinkable")
         {
-            //add shrink/grow mechanic here 
-            Destroy(hit.collider.gameObject);
+            collided = hit.collider;
+            TriggerShrink();
+    
+        }
+        
+    }
+
+    public void TriggerShrink()
+    {
+        StartCoroutine(WaitBeforeShrink());
+    }
+
+    private IEnumerator WaitBeforeShrink()
+    {
+        yield return new WaitForSeconds(0.51f);
+        Destroy(gameObject);
+        ShrinkableScript shrinkable = collided.GetComponent<ShrinkableScript>();
+
+        if (shrinkable != null)
+        {
+            Debug.Log("shrinking");
+            shrinkable.Shrink();
         }
     }
+
+    private IEnumerator DelayScalingStart()
+    {
+        yield return new WaitForSeconds(0.1f); 
+    }
+
+
 }
