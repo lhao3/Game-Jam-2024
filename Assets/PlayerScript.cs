@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,19 +10,21 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float scaleSpeed = 1f;
     [SerializeField] private GameObject laser;
     [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] public float laserX;
+    [SerializeField] public float laserY;
 
     public float xScale = 1f;
     public float yScale = 1f;
-    const float maxSize = 0.4f;  //Max size
-    const float minSize = 0.1f;
+    [SerializeField] const float maxSize = 0.4f;  //Max size
+    [SerializeField] const float minSize = 0.1f;
     private float scaleFactor;
     private bool scaling = false;
     private Vector3 targetScale;
 
     private Vector3 normalScale;
 
-    public float movementSpeed = 5f;
-    public float jumpForce = 2f;
+    [SerializeField] public float movementSpeed = 5f;
+    [SerializeField] public float jumpForce = 2f;
     private string size;
     public float shrinkFactor = 0.5f;
     public float growFactor = 2f;
@@ -96,8 +99,10 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var laserOriginTransform = transform;
-            Instantiate(laser, laserOriginTransform.TransformPoint(Vector3.forward * 2), transform.rotation);
+            //var laserOriginTransform = transform;
+            Vector3 laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
+            //Instantiate(laser, laserOriginTransform.TransformPoint(Vector3.forward * 2), transform.rotation);
+            Instantiate(laser, laserPosition, transform.rotation);
         }
 
         if (scaling)
