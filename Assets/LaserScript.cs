@@ -21,7 +21,7 @@ public class LaserScript : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 50f, layersToHit);
         if(hit.collider == null)
         {
-            transform.localScale = new Vector3(5f, transform.localScale.y, 1);
+            transform.localScale = new Vector3(1f, transform.localScale.y, 1);
             return;
         }
 
