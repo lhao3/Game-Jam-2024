@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
     public LayerMask layersToHit;
+    private Collider2D collided; 
 
     // Start is called before the first frame update
     void Start()
@@ -30,18 +32,38 @@ public class LaserScript : MonoBehaviour
 
         if (hit.collider.tag == "Shrinkable")
         {
-            //add shrink/grow mechanic here 
+            collided = hit.collider; 
+            TriggerShrink();
+            /*StartCoroutine(WaitBeforeShrink());
+
             ShrinkableScript shrinkable = hit.collider.GetComponent<ShrinkableScript>();
 
             if (shrinkable != null)
             {
                 Debug.Log("shrinking");
                 shrinkable.Shrink();
-            }
-            //Destroy(hit.collider.gameObject);
+            }*/
         }
 
+        
+    }
 
+    public void TriggerShrink()
+    {
+        StartCoroutine(WaitBeforeShrink());
+    }
+
+    private IEnumerator WaitBeforeShrink()
+    {
+        yield return new WaitForSeconds(0.51f);
+
+        ShrinkableScript shrinkable = collided.GetComponent<ShrinkableScript>();
+
+        if (shrinkable != null)
+        {
+            Debug.Log("shrinking");
+            shrinkable.Shrink();
+        }
     }
 
 }
