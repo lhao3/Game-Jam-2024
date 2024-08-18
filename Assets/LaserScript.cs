@@ -6,7 +6,7 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
     [SerializeField] private float laserLength;
-    [SerializeField] public PlayerScript playerScript;
+    private PlayerScript playerScript;
     public LayerMask layersToHit;
     private Collider2D collided;
 
@@ -14,6 +14,15 @@ public class LaserScript : MonoBehaviour
     void Start()
     {
         //StartCoroutine(DelayScalingStart());
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerScript>();
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found in the scene.");
+        }
     }
 
     // Update is called once per frame
@@ -56,15 +65,20 @@ public class LaserScript : MonoBehaviour
 
         if (shrinkable != null)
         {
-            Debug.Log("shrinking");
+            bool shrinkToggleState = playerScript.GetShrinkToggle();
+            Debug.Log($"Shrink Toggle at time of scaling: {shrinkToggleState}");
+
             if (playerScript.GetShrinkToggle())
             {
+                Debug.Log("shrinking");
                 shrinkable.Shrink();
             }
             else
             {
+                Debug.Log("growing");
                 shrinkable.Grow();
             }
+            Debug.Log("" + playerScript.GetShrinkToggle());
             
         }
     }

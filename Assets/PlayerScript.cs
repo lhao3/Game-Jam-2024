@@ -105,7 +105,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
            shrinkToggle = !shrinkToggle;
-            Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
+           Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
