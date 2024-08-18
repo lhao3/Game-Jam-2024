@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShrinkableScript : MonoBehaviour
+public class ShrinkableVineScript : MonoBehaviour
 {
     public string size;
 
     [SerializeField]
-    public float maxXSize = 2f; // Max X size
+    public float maxXSize = 5f; // Max X size
 
     [SerializeField]
-    public float maxYSize = 2f; // Max Y size
+    public float maxYSize = 1f; // Max Y size
 
     [SerializeField]
     public float minXSize = 0.5f; // Min X size
 
     [SerializeField]
-    public float minYSize = 0.5f; // Min Y size
+    public float minYSize = 1f; // Min Y size
 
     [SerializeField] private float scaleSpeed = 1f; // Speed of scaling
     private Vector3 normalScale;
@@ -30,7 +30,7 @@ public class ShrinkableScript : MonoBehaviour
     void Start()
     {
         size = "normal";
-       
+
         normalScale = transform.localScale;
 
     }
