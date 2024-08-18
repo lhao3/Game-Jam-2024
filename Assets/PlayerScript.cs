@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] private float scaleSpeed = 1f;
+    [SerializeField] private GameObject laser;
+    [SerializeField] private SpriteRenderer playerSprite;
+
     public float xScale = 1f;
     public float yScale = 1f;
     const float maxSize = 0.4f;  //Max size
@@ -39,6 +44,17 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            playerSprite.flipX = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            playerSprite.flipX = false; 
+        }
+
         isGrounded = floorCollider.IsTouching(floorFilter);
 
         if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
@@ -78,6 +94,12 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var laserOriginTransform = transform;
+            Instantiate(laser, laserOriginTransform.TransformPoint(Vector3.forward * 2), transform.rotation);
+        }
+
         if (scaling)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, targetScale, scaleSpeed * Time.deltaTime);
@@ -102,12 +124,11 @@ public class PlayerScript : MonoBehaviour
 
     public void SetScaling(Vector3 targetSize, float factor)
     {
-        /*Vector3 scale = transform.localScale * shrinkFactor;
-        transform.localScale = scale;*/
 
         targetScale = targetSize;
         scaling = true;
         scaleFactor = factor;
     }
+
 
 }
