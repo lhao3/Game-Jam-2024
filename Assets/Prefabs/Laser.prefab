@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserLength: 5
+  playerScript: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
   layersToHit:
     serializedVersion: 2
     m_Bits: 8
