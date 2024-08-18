@@ -58,7 +58,7 @@ public class PlayerScript : MonoBehaviour
             playerSprite.flipX = false; 
         }
 
-        isGrounded = floorCollider.IsTouching(floorFilter);
+        //isGrounded = floorCollider.IsTouching(floorFilter);
 
         if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
@@ -133,6 +133,28 @@ public class PlayerScript : MonoBehaviour
         targetScale = targetSize;
         scaling = true;
         scaleFactor = factor;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            if (collision.contacts[0].normal.y > 0.5f)
+            {
+                isGrounded = true;
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            if (collision.contacts[0].normal.y > 0.5f)
+            {
+                isGrounded = false;
+            }
+        }
     }
 
 
