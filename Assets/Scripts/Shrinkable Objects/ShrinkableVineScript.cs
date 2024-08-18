@@ -7,13 +7,13 @@ public class ShrinkableVineScript : MonoBehaviour
     public string size;
 
     [SerializeField]
-    public float maxXSize = 5f; // Max X size
+    public float maxXSize = 1f; // Max X size
 
     [SerializeField]
-    public float maxYSize = 1f; // Max Y size
+    public float maxYSize = 5f; // Max Y size
 
     [SerializeField]
-    public float minXSize = 0.5f; // Min X size
+    public float minXSize = 1f; // Min X size
 
     [SerializeField]
     public float minYSize = 1f; // Min Y size
@@ -31,6 +31,8 @@ public class ShrinkableVineScript : MonoBehaviour
     {
         size = "normal";
 
+        maxXSize = transform.localScale.x;
+        minXSize = transform.localScale.x;
         normalScale = transform.localScale;
 
     }
