@@ -102,20 +102,37 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (playerSprite.flipX)
+            bool isFlipped = playerSprite.flipX;
+
+            if (isFlipped)
             {
-                // laser.transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                
                 laserPosition = new Vector3(transform.position.x - laserX, transform.position.y + laserY, 0);
-                laserSprite.flipX = true;
+
             }
             else
             {
-                // transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                
                 laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
-                laserSprite.flipX = false; 
+ 
             }
-            //laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
-            Instantiate(laser, laserPosition, transform.rotation);
+      
+            GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
+            SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
+
+
+            if (playerSprite.flipX)
+            {
+                instantiatedLaser.transform.localScale = new Vector3(-Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+                instantiatedLaser.transform.right = Vector3.left;
+
+            }
+            else
+            {
+                instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+                instantiatedLaser.transform.right = Vector3.right;
+            }
+            
         }
 
         if (scaling)
