@@ -10,7 +10,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float scaleSpeed = 1f;
     [SerializeField] private GameObject laser;
     [SerializeField] private SpriteRenderer playerSprite;
-    [SerializeField] private SpriteRenderer laserSprite; 
     [SerializeField] public float laserX;
     [SerializeField] public float laserY;
 
@@ -36,6 +35,7 @@ public class PlayerScript : MonoBehaviour
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
     private Vector3 laserPosition;
+    private SpriteRenderer laserSprite;
 
     // Start is called before the first frame update
     void Start()
