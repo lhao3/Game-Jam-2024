@@ -38,20 +38,7 @@ public class ShrinkableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (size == "normal" || size == "large")
-            {
-                SetScaling(minSize, 0.5f); // Shrink to minSize
-                size = "small";
-            }
-            else if (size == "small")
-            {
-                SetScaling(maxSize, 1.5f); // Grow to maxSize
-                size = "large";
-            }
-        }*/
-        if (Input.GetKeyDown(KeyCode.P) && size != "large")
+       /* if (Input.GetKeyDown(KeyCode.P) && size != "large")
         {
 
             if (size.Equals("small"))
@@ -81,7 +68,7 @@ public class ShrinkableScript : MonoBehaviour
                 Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
                 SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
-        }
+        }*/
 
         if (scaling)
         {
@@ -93,6 +80,42 @@ public class ShrinkableScript : MonoBehaviour
             {
                 transform.localScale = targetScale;
                 scaling = false;
+            }
+        }
+    }
+
+    public void Shrink()
+    {
+        if(size != "small")
+        {
+            if (size.Equals("large"))
+            {
+                size = "normal";
+                SetScaling(normalScale, 1f);   //shrink back to normal size if grown
+            }
+            else
+            {
+                size = "small";
+                Vector3 shrunkenScale = new Vector3(minSize, minSize, 1f);
+                SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
+            }
+        }
+    }
+
+    public void Grow()
+    {
+        if(size != "large")
+        {
+            if (size.Equals("small"))
+            {
+                size = "normal";
+                SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
+            }
+            else
+            {
+                size = "large";
+                Vector3 grownScale = new Vector3(maxSize, maxSize, 1f);
+                SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
     }
