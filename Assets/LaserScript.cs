@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
+    [SerializeField] private float laserLength;
     public LayerMask layersToHit;
     private Collider2D collided; 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //StartCoroutine(DelayScalingStart());
     }
 
     // Update is called once per frame
     void Update()
     {
-        float angle = transform.eulerAngles.z * Mathf.Deg2Rad;
-        Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        Vector2 dir = transform.right;
+        Debug.DrawRay(transform.position, dir * laserLength, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 50f, layersToHit);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, laserLength, layersToHit);
         if (hit.collider == null)
         {
             transform.localScale = new Vector3(1f, transform.localScale.y, 1);
@@ -28,23 +29,14 @@ public class LaserScript : MonoBehaviour
         }
 
         transform.localScale = new Vector3(hit.distance, transform.localScale.y, 1);
-        Debug.Log(hit.collider.gameObject.name);
+        //Debug.Log(hit.collider.gameObject.name);
 
         if (hit.collider.tag == "Shrinkable")
         {
-            collided = hit.collider; 
+            collided = hit.collider;
             TriggerShrink();
-            /*StartCoroutine(WaitBeforeShrink());
-
-            ShrinkableScript shrinkable = hit.collider.GetComponent<ShrinkableScript>();
-
-            if (shrinkable != null)
-            {
-                Debug.Log("shrinking");
-                shrinkable.Shrink();
-            }*/
+    
         }
-
         
     }
 
@@ -56,7 +48,7 @@ public class LaserScript : MonoBehaviour
     private IEnumerator WaitBeforeShrink()
     {
         yield return new WaitForSeconds(0.51f);
-
+        Destroy(gameObject);
         ShrinkableScript shrinkable = collided.GetComponent<ShrinkableScript>();
 
         if (shrinkable != null)
@@ -65,5 +57,11 @@ public class LaserScript : MonoBehaviour
             shrinkable.Shrink();
         }
     }
+
+    private IEnumerator DelayScalingStart()
+    {
+        yield return new WaitForSeconds(0.1f); 
+    }
+
 
 }
