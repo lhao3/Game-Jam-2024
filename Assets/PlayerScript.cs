@@ -150,10 +150,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            if (collision.contacts[0].normal.y > 0.5f)
-            {
                 isGrounded = false;
-            }
+            
         }
     }
 
