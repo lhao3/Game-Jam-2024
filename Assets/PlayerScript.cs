@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] public float laserX;
     [SerializeField] public float laserY;
     [SerializeField] private float laserCooldownTime = 1.0f;
+    [SerializeField] private GameObject boxCheck;
 
 
     public float xScale = 1f;
@@ -44,6 +45,7 @@ public class PlayerScript : MonoBehaviour
     public Vector2 boxSize;
     public float castDistance;
     public LayerMask groundLayer;
+ 
 
 
 
@@ -96,6 +98,11 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && size != "grown")
         {
+
+            if (!CollisionCheck())
+            {
+                return;
+            }
 
             if (size.Equals("shrunk"))
             {  
@@ -183,6 +190,32 @@ public class PlayerScript : MonoBehaviour
 
 
     }
+
+    public bool CollisionCheck()
+    {
+        GameObject temp = Instantiate(boxCheck, transform.position, Quaternion.identity);
+        //temp.transform.localScale = new Vector3(maxSize, maxSize, 1);
+
+        BoxCheckScript boxCheckScript = temp.GetComponent<BoxCheckScript>();
+        bool checkNormalSize;
+
+        if(size == "normal"){
+            checkNormalSize = true;
+        }
+        else
+        {
+            checkNormalSize = false;
+        }
+
+        bool isRoom = boxCheckScript.CheckSpace(checkNormalSize);
+
+        //Destroy(temp.gameObject);
+
+        //Debug.Log("Is Room: " + isRoom);
+        return isRoom;
+    }
+
+
 
     private void FixedUpdate()
     {
