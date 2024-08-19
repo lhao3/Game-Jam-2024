@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/johnsontest.unity
     guid: 0c929a9ddc18f97489a4219cbc7c05f0
+  - enabled: 1
+    path: Assets/Scenes/levels 1-5/Level 1.unity
+    guid: 939198100fd840240a23522f37c9f400
   m_configObjects: {}
