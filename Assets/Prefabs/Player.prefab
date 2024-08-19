@@ -202,10 +202,13 @@ MonoBehaviour:
     maxNormalAngle: 0
   shrinkToggle: 1
   boxSize: {x: 0.66, y: 0.15}
+  yOffsetSmall: 0.3
+  yOffsetLarge: -0.5
   castDistance: 0.62
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  pos: {x: 0, y: 0, z: 0}
 --- !u!95 &1426531492060856117
 Animator:
   serializedVersion: 5

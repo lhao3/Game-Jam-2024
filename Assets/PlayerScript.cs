@@ -43,8 +43,11 @@ public class PlayerScript : MonoBehaviour
     public bool shrinkToggle = true; 
     private float lastShootTime = -Mathf.Infinity;
     public Vector2 boxSize;
+    public float yOffsetSmall;
+    public float yOffsetLarge;
     public float castDistance;
     public LayerMask groundLayer;
+    public Vector3 pos;
  
 
 
@@ -171,7 +174,21 @@ public class PlayerScript : MonoBehaviour
 
     public bool isOnGround()
     {
-        if(Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer))
+
+        if(size == "shrunk")
+        {
+            pos = new Vector3(transform.position.x, transform.position.y + yOffsetSmall, transform.position.z);
+        }
+        else if(size == "normal")
+        {
+            pos = transform.position;
+        }
+        else
+        {
+            pos = new Vector3(transform.position.x, transform.position.y + yOffsetLarge, transform.position.z);
+        }
+
+        if(Physics2D.BoxCast(pos, boxSize, 0, -transform.up, castDistance, groundLayer))
         {
             return true;
         }
@@ -184,9 +201,9 @@ public class PlayerScript : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Vector3 center = transform.position - (transform.up * castDistance / 2);
+        //Vector3 center = transform.position - (transform.up * castDistance / 2);
         //Gizmos.DrawWireCube(center, boxSize);
-        Gizmos.DrawCube(transform.position - transform.up * castDistance, boxSize);
+        Gizmos.DrawCube(pos - transform.up * castDistance, boxSize);
 
 
     }
@@ -194,7 +211,6 @@ public class PlayerScript : MonoBehaviour
     public bool CollisionCheck()
     {
         GameObject temp = Instantiate(boxCheck, transform.position, Quaternion.identity);
-        //temp.transform.localScale = new Vector3(maxSize, maxSize, 1);
 
         BoxCheckScript boxCheckScript = temp.GetComponent<BoxCheckScript>();
         bool checkNormalSize;
@@ -209,9 +225,8 @@ public class PlayerScript : MonoBehaviour
 
         bool isRoom = boxCheckScript.CheckSpace(checkNormalSize);
 
-        //Destroy(temp.gameObject);
+        Destroy(temp);
 
-        //Debug.Log("Is Room: " + isRoom);
         return isRoom;
     }
 
