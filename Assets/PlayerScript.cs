@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour
         {
 
             if (size.Equals("shrunk"))
-            {
+            {  
                 size = "normal";
                 SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
             }
