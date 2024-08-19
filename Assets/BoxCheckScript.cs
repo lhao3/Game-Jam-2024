@@ -67,26 +67,5 @@ public class BoxCheckScript : MonoBehaviour
         return isEmpty;
     }
 
-    // This function is called to draw Gizmos, which are always visible in the scene view
-   /* private void OnDrawGizmos()
-    {
-        if (originalSize == Vector2.zero)
-            return; // Avoid drawing if originalSize isn't set
-
-        // Use a default scale for visualization in editor mode
-        float scale = 1f;
-        Vector2 boxSize = new Vector2(originalSize.x * scale, originalSize.y * scale);
-
-        Vector3 bottomLeft = transform.position - new Vector3(boxSize.x / 2, boxSize.y / 2, 0);
-        Vector3 bottomRight = transform.position + new Vector3(boxSize.x / 2, -boxSize.y / 2, 0);
-        Vector3 topLeft = transform.position + new Vector3(-boxSize.x / 2, boxSize.y / 2, 0);
-        Vector3 topRight = transform.position + new Vector3(boxSize.x / 2, boxSize.y / 2, 0);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(bottomLeft, bottomRight);
-        Gizmos.DrawLine(bottomLeft, topLeft);
-        Gizmos.DrawLine(topLeft, topRight);
-        Gizmos.DrawLine(topRight, bottomRight);
-    }*/
 
 }

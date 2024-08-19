@@ -194,7 +194,6 @@ public class PlayerScript : MonoBehaviour
     public bool CollisionCheck()
     {
         GameObject temp = Instantiate(boxCheck, transform.position, Quaternion.identity);
-        //temp.transform.localScale = new Vector3(maxSize, maxSize, 1);
 
         BoxCheckScript boxCheckScript = temp.GetComponent<BoxCheckScript>();
         bool checkNormalSize;
@@ -209,9 +208,8 @@ public class PlayerScript : MonoBehaviour
 
         bool isRoom = boxCheckScript.CheckSpace(checkNormalSize);
 
-        //Destroy(temp.gameObject);
+        Destroy(temp);
 
-        //Debug.Log("Is Room: " + isRoom);
         return isRoom;
     }
 
