@@ -33,7 +33,6 @@ public class PlayerScript : MonoBehaviour
     private float horizontalMovement;
     private Rigidbody2D rb2D;
     private bool hasJumped = false;
-    private bool isGrounded = true; 
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
     private Vector3 laserPosition;
@@ -41,6 +40,11 @@ public class PlayerScript : MonoBehaviour
     private Animator animator;
     public bool shrinkToggle = true; 
     private float lastShootTime = -Mathf.Infinity;
+    public Vector2 boxSize;
+    public float castDistance;
+    public LayerMask groundLayer;
+
+
 
 
     // Start is called before the first frame update
@@ -58,19 +62,29 @@ public class PlayerScript : MonoBehaviour
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
 
+
+        if (Input.GetKeyDown(KeyCode.W) && isOnGround())
+        {
+            hasJumped = true;
+            Debug.Log("Player has jumped");
+
+        }
+
+
         if (animator != null)
         {
             if (horizontalMovement == 0)
             {
                 animator.SetFloat("Speed", 0);
             }    
-            else if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 playerSprite.flipX = true;
                 animator.SetFloat("Speed", 0.5f);
                 Debug.Log("Pressed A");
+                Debug.Log("Grounded: " + isOnGround());
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 playerSprite.flipX = false;
                 animator.SetFloat("Speed", 0.5f);
@@ -78,12 +92,6 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        //isGrounded = floorCollider.IsTouching(floorFilter);
-
-        if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
-        {
-            hasJumped = true; 
-        }
 
         if (Input.GetKeyDown(KeyCode.P) && size != "grown")
         {
@@ -144,16 +152,42 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
+
+    }
+
+    public bool isOnGround()
+    {
+        if(Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector3 center = transform.position - (transform.up * castDistance / 2);
+        //Gizmos.DrawWireCube(center, boxSize);
+        Gizmos.DrawCube(transform.position - transform.up * castDistance, boxSize);
+
+
     }
 
     private void FixedUpdate()
     {
         rb2D.velocity = new Vector2(horizontalMovement * movementSpeed, rb2D.velocity.y);
-        if (hasJumped)
+        if (isOnGround() && hasJumped)
         {
+            
             hasJumped = false;
             rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+ 
         }
+
     }
 
     private void ShootLaser()
@@ -200,25 +234,6 @@ public class PlayerScript : MonoBehaviour
         scaleFactor = factor;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            if (collision.contacts[0].normal.y > 0.5f)
-            {
-                isGrounded = true;
-            }
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-   
-            isGrounded = false;            
-        }
-    }
 
     public bool GetShrinkToggle()
     {

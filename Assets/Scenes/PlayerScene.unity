@@ -1160,8 +1160,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3508488581649257761, guid: c981e773268fd444a814ad468b722ea5, type: 3}
     - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
+      propertyPath: boxSize.x
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
+      propertyPath: boxSize.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: laserSprite
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
+      propertyPath: castDistance
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: shrinkToggle
@@ -1170,6 +1182,10 @@ PrefabInstance:
     - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: laserCooldownTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4804628966433205814, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: m_LocalPosition.x
