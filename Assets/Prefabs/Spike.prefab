@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2190761622558292699}
   - component: {fileID: 3476322128396214675}
   - component: {fileID: 1446278283147879892}
-  - component: {fileID: 5916917811344019663}
+  - component: {fileID: 5629777975414781435}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Lethal
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5338eebc2f8494d8b418862f44dd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawn: 0
---- !u!60 &5916917811344019663
+  respawn: 4
+--- !u!60 &5629777975414781435
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,14 +128,14 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -143,10 +143,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.03, y: 0.08}
-      - {x: -0.08, y: -0.02}
-      - {x: -0.093488716, y: -0.07999996}
-      - {x: 0.08, y: -0.08}
-      - {x: 0.093488626, y: -0.07881668}
-      - {x: 0.009767022, y: 0.08}
+    - - {x: 0.0044115037, y: 0.50570565}
+      - {x: 0.005948454, y: 0.50071526}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.49345753, y: -0.49966833}
+      - {x: 0.061013006, y: 0.38969156}
   m_UseDelaunayMesh: 0
