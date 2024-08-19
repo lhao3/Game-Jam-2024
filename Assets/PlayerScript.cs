@@ -209,4 +209,16 @@ public class PlayerScript : MonoBehaviour
         Destroy(newLaser);
     }
 
+    public void HitWeb()
+    {
+        movementSpeed -= 4f;
+        print("Player successfully slowed");
+    }
+
+    public void ExitWeb()
+    {
+        movementSpeed += 4f;
+        print("Player successfully exited web... increasing speed back to normal.");
+    }
+
 }
