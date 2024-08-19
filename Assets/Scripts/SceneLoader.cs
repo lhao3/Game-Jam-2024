@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    [SerializeField] private string goScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,30 +17,20 @@ public class SceneLoader : MonoBehaviour
     {
         
     }
-}
 
-public static class Loader
-{
-    //Will be used to Manage screen Transitions (Cam Movement, Scene mangement, etc.)
-    // Add Desired Scenes into Build Settings for this to function
-    public static void Load(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
-}
-
-public class ScreenEdge : MonoBehaviour
-{
-    [SerializeField] private string goScreen;
-
-    // Add Desired Scenes into Build Settings for this to function
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Loader.Load(goScreen);
+        Load(goScreen);
     }
 
     public string GoScreen()
     {
         return goScreen;
     }
+
+    public static void Load(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }
+
