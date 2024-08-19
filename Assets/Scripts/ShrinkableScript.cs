@@ -32,6 +32,7 @@ public class ShrinkableScript : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.P) && size != "large")
         {
             if (size.Equals("small"))
@@ -76,6 +77,7 @@ public class ShrinkableScript : MonoBehaviour
                 scaling = false;
             }
         }
+        */
     }
 
     public void Shrink()
