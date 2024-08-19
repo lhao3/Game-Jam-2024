@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] public float laserX;
     [SerializeField] public float laserY;
     [SerializeField] private float laserCooldownTime = 1.0f;
+    [SerializeField] private GameObject boxCheck;
 
     public float xScale = 1f;
     public float yScale = 1f;
@@ -37,8 +38,12 @@ public class PlayerScript : MonoBehaviour
     public bool shrinkToggle = true;
     private float lastShootTime = -Mathf.Infinity;
     public Vector2 boxSize;
+    public float yOffsetSmall;
+    public float yOffsetLarge;
     public float castDistance;
     public LayerMask groundLayer;
+    public Vector3 pos;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +89,12 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && size != "grown")
         {
+
+            if (!CollisionCheck())
+            {
+                return;
+            }
+
             if (size.Equals("shrunk"))
             {
                 size = "normal";
@@ -146,14 +157,63 @@ public class PlayerScript : MonoBehaviour
 
     public bool isOnGround()
     {
-        return Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer);
+
+        if(size == "shrunk")
+        {
+            pos = new Vector3(transform.position.x, transform.position.y + yOffsetSmall, transform.position.z);
+        }
+        else if(size == "normal")
+        {
+            pos = transform.position;
+        }
+        else
+        {
+            pos = new Vector3(transform.position.x, transform.position.y + yOffsetLarge, transform.position.z);
+        }
+
+        if(Physics2D.BoxCast(pos, boxSize, 0, -transform.up, castDistance, groundLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position - transform.up * castDistance, boxSize);
+        //Vector3 center = transform.position - (transform.up * castDistance / 2);
+        //Gizmos.DrawWireCube(center, boxSize);
+        Gizmos.DrawCube(pos - transform.up * castDistance, boxSize);
+
+
     }
+
+    public bool CollisionCheck()
+    {
+        GameObject temp = Instantiate(boxCheck, transform.position, Quaternion.identity);
+
+        BoxCheckScript boxCheckScript = temp.GetComponent<BoxCheckScript>();
+        bool checkNormalSize;
+
+        if(size == "normal"){
+            checkNormalSize = true;
+        }
+        else
+        {
+            checkNormalSize = false;
+        }
+
+        bool isRoom = boxCheckScript.CheckSpace(checkNormalSize);
+
+        Destroy(temp);
+
+        return isRoom;
+    }
+
+
 
     private void FixedUpdate()
     {
