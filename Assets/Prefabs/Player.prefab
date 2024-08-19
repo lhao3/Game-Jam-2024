@@ -178,6 +178,7 @@ MonoBehaviour:
   laserX: 0.1
   laserY: 0.2
   laserCooldownTime: 1
+  boxCheck: {fileID: 3001995344356523982, guid: f3a76eca44ac1924e9ba8fc7b77ed9a5, type: 3}
   xScale: 1
   yScale: 1
   movementSpeed: 6
