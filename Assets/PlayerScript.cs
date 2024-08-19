@@ -127,7 +127,8 @@ public class PlayerScript : MonoBehaviour
       
             GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
             SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
-
+            instantiatedLaser.transform.SetParent(transform);
+           
 
             if (playerSprite.flipX)
             {
@@ -141,10 +142,6 @@ public class PlayerScript : MonoBehaviour
                 instantiatedLaser.transform.right = Vector3.right;
             }
 
-            if(instantiatedLaser != null)
-            {
-                StartCoroutine(DestroyLaser(instantiatedLaser));
-            }
             
         }
 
@@ -203,10 +200,6 @@ public class PlayerScript : MonoBehaviour
         return shrinkToggle;
     }
 
-    private IEnumerator DestroyLaser(GameObject newLaser)
-    {
-        yield return new WaitForSeconds(0.52f);
-        Destroy(newLaser);
-    }
+
 
 }

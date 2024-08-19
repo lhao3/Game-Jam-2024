@@ -96,7 +96,7 @@ public class ShrinkableScript : MonoBehaviour
             else
             {
                 size = "small";
-                Vector3 shrunkenScale = new Vector3(minSize, minSize, 1f);
+                Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
                 SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
         }
@@ -114,7 +114,7 @@ public class ShrinkableScript : MonoBehaviour
             else
             {
                 size = "large";
-                Vector3 grownScale = new Vector3(maxSize, maxSize, 1f);
+                Vector3 grownScale = new Vector3(maxXSize, maxYSize, 1f);
                 SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
