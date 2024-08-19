@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShrinkableScript : MonoBehaviour
@@ -18,52 +20,55 @@ public class ShrinkableScript : MonoBehaviour
 
     [SerializeField] private float scaleSpeed = 1f; // Speed of scaling
     private Vector3 normalScale;
+
     private Vector3 targetScale;
     private bool scaling = false;
-    private Collider2D objectCollider2D;
-    private bool isColliding = false;
+    private float scaleFactor;
 
+
+    // Start is called before the first frame update
     void Start()
     {
         size = "normal";
-        objectCollider2D = GetComponent<Collider2D>();
+       
         normalScale = transform.localScale;
+
     }
 
+    // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.P) && size != "large")
+       /* if (Input.GetKeyDown(KeyCode.P) && size != "large")
         {
+
             if (size.Equals("small"))
             {
                 size = "normal";
-                SetScaling(normalScale); // Grow back to normal size if shrunken
+                SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
             }
             else
             {
+                size = "large";
                 Vector3 grownScale = new Vector3(maxXSize, maxYSize, 1f);
-                if (CheckSize(grownScale))
-                {
-                    size = "large";
-                    SetScaling(grownScale); // Grow to max size if not shrunken
-                }
+                SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
 
         if (Input.GetKeyDown(KeyCode.I) && size != "small")
         {
+
             if (size.Equals("large"))
             {
                 size = "normal";
-                SetScaling(normalScale); // Shrink back to normal size if grown
+                SetScaling(normalScale, 1f);   //shrink back to normal size if grown
             }
             else
             {
+                size = "small";
                 Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
-                SetScaling(shrunkenScale); // Shrink to min size if not grown
+                SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
-        }
+        }*/
 
         if (scaling)
         {
@@ -77,99 +82,55 @@ public class ShrinkableScript : MonoBehaviour
                 scaling = false;
             }
         }
-        */
     }
 
     public void Shrink()
     {
-        if (size != "small")
+        if(size != "small")
         {
             if (size.Equals("large"))
             {
                 size = "normal";
-                SetScaling(normalScale); // Shrink back to normal size if grown
+                SetScaling(normalScale, 1f);   //shrink back to normal size if grown
             }
             else
             {
+                size = "small";
                 Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
-                SetScaling(shrunkenScale); // Shrink to min size if not grown
+                SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
         }
     }
 
     public void Grow()
     {
-        if (size != "large")
+        if(size != "large")
         {
             if (size.Equals("small"))
             {
                 size = "normal";
-                SetScaling(normalScale); // Grow back to normal size if shrunken
+                SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
             }
             else
             {
+                size = "large";
                 Vector3 grownScale = new Vector3(maxXSize, maxYSize, 1f);
-                if (CheckSize(grownScale))
-                {
-                    size = "large";
-                    SetScaling(grownScale); // Grow to max size if not shrunken
-                }
+                SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
     }
 
-    private void SetScaling(Vector3 targetSize)
+    private void SetScaling(Vector3 targetsize, float factor)
     {
-        targetScale = targetSize;
+        targetScale = targetsize;
         scaling = true;
-        Debug.Log($"Setting scaling to target size: {targetSize}");
+        scaleFactor = factor;
     }
 
-    private bool CheckSize(Vector3 newScale)
+    // TODO: come up with algorithm here
+    // if resulting dimensions overlap with other objects/environemnt, return false, else return true
+    private bool CheckSize()
     {
-        // Temporarily apply the new scale
-        Vector3 tempScale = transform.localScale;
-        transform.localScale = newScale;
-
-        // Define the bounds of the object in its new size
-        Bounds bounds = new Bounds(transform.position, transform.localScale);
-        Debug.Log($"Checking collisions with bounds: Center = {bounds.center}, Size = {bounds.size}");
-
-        // Check for overlaps with colliders in the area where the object will scale
-        Collider2D[] colliders = Physics2D.OverlapBoxAll((Vector2)bounds.center, (Vector2)bounds.size, 0f);
-
-        isColliding = false;
-        foreach (Collider2D collider in colliders)
-        {
-            // Ignore collisions with self
-            if (collider != objectCollider2D)
-            {
-                // Check if the collision is blocking
-                if (IsBlockingCollision(collider, bounds))
-                {
-                    isColliding = true;
-                    Debug.Log($"Collision detected with {collider.gameObject.name}");
-                    transform.localScale = tempScale;
-                    return false;
-                }
-            }
-        }
-
-        // Restore the original scale
-        transform.localScale = tempScale;
-        if (!isColliding)
-        {
-            Debug.Log("No collisions detected. Scaling is allowed.");
-        }
-        return !isColliding;
-    }
-
-    private bool IsBlockingCollision(Collider2D collider, Bounds bounds)
-    {
-        // Calculate the bounds of the other collider
-        Bounds otherBounds = collider.bounds;
-
-        // Ensure there is space for the object to fit
-        return !bounds.Intersects(otherBounds);
+        return true;
     }
 }
