@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour
     public ContactFilter2D floorFilter;
     private Vector3 laserPosition;
     private SpriteRenderer laserSprite;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class PlayerScript : MonoBehaviour
         size = "normal";
         normalScale = transform.localScale;
         laserSprite = laser.GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,14 +53,24 @@ public class PlayerScript : MonoBehaviour
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
 
-        if(Input.GetKeyDown(KeyCode.A))
+        if (animator != null)
         {
-            playerSprite.flipX = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            playerSprite.flipX = false; 
+            if (horizontalMovement == 0)
+            {
+                animator.SetFloat("Speed", 0);
+            }    
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                playerSprite.flipX = true;
+                animator.SetFloat("Speed", 0.5f);
+                Debug.Log("Pressed A");
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                playerSprite.flipX = false;
+                animator.SetFloat("Speed", 0.5f);
+                Debug.Log("Pressed D");
+            }
         }
 
         //isGrounded = floorCollider.IsTouching(floorFilter);
