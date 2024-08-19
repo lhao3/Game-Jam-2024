@@ -6,12 +6,18 @@ public class ShrinkableScript : MonoBehaviour
 {
     public string size;
 
-  
+    [SerializeField]
+    public float maxXSize = 2f; // Max X size
 
-    public float xScale = 1f; // Default value, adjust as needed
-    public float yScale = 1f; // Default value, adjust as needed
-    [SerializeField] public float maxSize = 2f; // Max size
-    [SerializeField] public float minSize = 0.5f; // Min size
+    [SerializeField]
+    public float maxYSize = 2f; // Max Y size
+
+    [SerializeField]
+    public float minXSize = 0.5f; // Min X size
+
+    [SerializeField]
+    public float minYSize = 0.5f; // Min Y size
+
     [SerializeField] private float scaleSpeed = 1f; // Speed of scaling
     private Vector3 normalScale;
 
@@ -24,7 +30,7 @@ public class ShrinkableScript : MonoBehaviour
     void Start()
     {
         size = "normal";
-
+       
         normalScale = transform.localScale;
 
     }
@@ -43,7 +49,7 @@ public class ShrinkableScript : MonoBehaviour
             else
             {
                 size = "large";
-                Vector3 grownScale = new Vector3(maxSize, maxSize, 1f);
+                Vector3 grownScale = new Vector3(maxXSize, maxYSize, 1f);
                 SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
@@ -59,7 +65,7 @@ public class ShrinkableScript : MonoBehaviour
             else
             {
                 size = "small";
-                Vector3 shrunkenScale = new Vector3(minSize, minSize, 1f);
+                Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
                 SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
         }*/
@@ -90,7 +96,7 @@ public class ShrinkableScript : MonoBehaviour
             else
             {
                 size = "small";
-                Vector3 shrunkenScale = new Vector3(minSize, minSize, 1f);
+                Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
                 SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
         }
@@ -108,7 +114,7 @@ public class ShrinkableScript : MonoBehaviour
             else
             {
                 size = "large";
-                Vector3 grownScale = new Vector3(maxSize, maxSize, 1f);
+                Vector3 grownScale = new Vector3(maxXSize, maxYSize, 1f);
                 SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }

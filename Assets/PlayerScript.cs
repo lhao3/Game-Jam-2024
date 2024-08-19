@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -37,6 +38,8 @@ public class PlayerScript : MonoBehaviour
     private Vector3 laserPosition;
     private SpriteRenderer laserSprite;
     private Animator animator;
+    public bool shrinkToggle = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +115,12 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+           shrinkToggle = !shrinkToggle;
+           Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             bool isFlipped = playerSprite.flipX;
@@ -131,7 +140,8 @@ public class PlayerScript : MonoBehaviour
       
             GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
             SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
-
+            instantiatedLaser.transform.SetParent(transform);
+           
 
             if (playerSprite.flipX)
             {
@@ -144,6 +154,7 @@ public class PlayerScript : MonoBehaviour
                 instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
                 instantiatedLaser.transform.right = Vector3.right;
             }
+
             
         }
 
@@ -197,5 +208,23 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public bool GetShrinkToggle()
+    {
+        return shrinkToggle;
+    }
+
+
+
+    public void HitWeb()
+    {
+        movementSpeed -= 4f;
+        print("Player successfully slowed");
+    }
+
+    public void ExitWeb()
+    {
+        movementSpeed += 4f;
+        print("Player successfully exited web... increasing speed back to normal.");
+    }
 
 }
