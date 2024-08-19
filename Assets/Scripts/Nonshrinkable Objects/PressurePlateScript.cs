@@ -21,13 +21,6 @@ public class PressurePlateScript : NonShrinkableScript
     // Update is called once per frame
     void Update()
     {
-        if (activated)
-        {
-            if (linkedObject.name == "Growing Vine")
-            {
-                linkedObject.SendMessage("Activate");
-            }
-        }
 
     }
 
@@ -35,6 +28,11 @@ public class PressurePlateScript : NonShrinkableScript
     {
         activated = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = pressedPressurePlate;
+
+        if (linkedObject.name == "Growing Vine")
+        {
+            linkedObject.SendMessage("Activate");
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

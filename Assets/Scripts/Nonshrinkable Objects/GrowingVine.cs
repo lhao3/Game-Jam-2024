@@ -9,7 +9,7 @@ public class GrowingVine : MonoBehaviour
     public Sprite VineStage2;
     public Sprite VineStage3;
     public Sprite VineStage4;
-    public float targetTime = 15.0f;
+    public float targetTime;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,7 @@ public class GrowingVine : MonoBehaviour
         if (targetTime <= 0.0f)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = VineStage4;
+            activated = false;
         } else if (targetTime <= 5.0f)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = VineStage3;
@@ -36,6 +37,8 @@ public class GrowingVine : MonoBehaviour
 
     void Activate()
     {
+        print("growing vine activated");
+        targetTime = 15.0f;
         activated = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = VineStage1;
     }
