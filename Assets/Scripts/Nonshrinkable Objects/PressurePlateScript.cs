@@ -6,12 +6,15 @@ public class PressurePlateScript : NonShrinkableScript
 {
 
     public bool activated;
-    DoorScript linkedDoor;
+    public GameObject linkedObject;
+    public Sprite unpressedPressurePlate;
+    public Sprite pressedPressurePlate;
 
     // Start is called before the first frame update
     void Start()
     {
         activated = false;
+        
 
     }
 
@@ -20,8 +23,23 @@ public class PressurePlateScript : NonShrinkableScript
     {
         if (activated)
         {
-            linkedDoor.opened = true;
+            if (linkedObject.name == "Growing Vine")
+            {
+                linkedObject.SendMessage("Activate");
+            }
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        activated = true;
+        gameObject.GetComponent<SpriteRenderer>().sprite = pressedPressurePlate;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        activated = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = unpressedPressurePlate;
     }
 }
