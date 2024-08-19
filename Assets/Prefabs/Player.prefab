@@ -177,6 +177,7 @@ MonoBehaviour:
   playerSprite: {fileID: 6291065596087083182}
   laserX: 0.1
   laserY: 0.2
+  laserCooldownTime: 1
   xScale: 1
   yScale: 1
   movementSpeed: 6
@@ -199,6 +200,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   shrinkToggle: 1
+  boxSize: {x: 0.66, y: 0.15}
+  castDistance: 0.62
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!95 &1426531492060856117
 Animator:
   serializedVersion: 5
