@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] public float laserY;
     [SerializeField] private float laserCooldownTime = 1.0f;
 
+
     public float xScale = 1f;
     public float yScale = 1f;
     [SerializeField] const float maxSize = 0.4f;  //Max size
@@ -93,7 +94,7 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.P) && size != "grown")
+        if (Input.GetKeyDown(KeyCode.Q) && size != "grown")
         {
 
             if (size.Equals("shrunk"))
@@ -109,7 +110,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && size != "shrunk")
+        if (Input.GetKeyDown(KeyCode.E) && size != "shrunk")
         {
 
             if (size.Equals("grown"))
@@ -125,10 +126,16 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-           shrinkToggle = !shrinkToggle;
+           shrinkToggle = true;
            Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            shrinkToggle = false;
+            Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
