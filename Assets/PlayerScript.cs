@@ -299,13 +299,13 @@ public class PlayerScript : MonoBehaviour
 
     public void HitWeb()
     {
-        movementSpeed -= 4f;
+        movementSpeed -= 5.75f;
         print("Player successfully slowed");
     }
 
     public void ExitWeb()
     {
-        movementSpeed += 4f;
+        movementSpeed += 5.75f;
         print("Player successfully exited web... increasing speed back to normal.");
     }
 
