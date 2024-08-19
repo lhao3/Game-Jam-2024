@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -31,9 +32,12 @@ public class PlayerScript : MonoBehaviour
     private float horizontalMovement;
     private Rigidbody2D rb2D;
     private bool hasJumped = false;
-    private bool isGrounded = false; 
+    private bool isGrounded = true; 
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
+    private Vector3 laserPosition;
+    private SpriteRenderer laserSprite;
+    public bool shrinkToggle = true;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,7 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         size = "normal";
         normalScale = transform.localScale;
+        laserSprite = laser.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -97,12 +102,50 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+           shrinkToggle = !shrinkToggle;
+           Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //var laserOriginTransform = transform;
-            Vector3 laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
-            //Instantiate(laser, laserOriginTransform.TransformPoint(Vector3.forward * 2), transform.rotation);
-            Instantiate(laser, laserPosition, transform.rotation);
+            bool isFlipped = playerSprite.flipX;
+
+            if (isFlipped)
+            {
+                
+                laserPosition = new Vector3(transform.position.x - laserX, transform.position.y + laserY, 0);
+
+            }
+            else
+            {
+                
+                laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
+ 
+            }
+      
+            GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
+            SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
+
+
+            if (playerSprite.flipX)
+            {
+                instantiatedLaser.transform.localScale = new Vector3(-Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+                instantiatedLaser.transform.right = Vector3.left;
+
+            }
+            else
+            {
+                instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+                instantiatedLaser.transform.right = Vector3.right;
+            }
+
+            if(instantiatedLaser != null)
+            {
+                StartCoroutine(DestroyLaser(instantiatedLaser));
+            }
+            
         }
 
         if (scaling)
@@ -150,10 +193,20 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-                isGrounded = false;
-            
+   
+            isGrounded = false;            
         }
     }
 
+    public bool GetShrinkToggle()
+    {
+        return shrinkToggle;
+    }
+
+    private IEnumerator DestroyLaser(GameObject newLaser)
+    {
+        yield return new WaitForSeconds(0.52f);
+        Destroy(newLaser);
+    }
 
 }
