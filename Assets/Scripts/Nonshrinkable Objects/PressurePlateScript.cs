@@ -6,8 +6,7 @@ public class PressurePlateScript : NonShrinkableScript
 {
 
     public bool activated;
-    DoorScript linkedDoor;
-    private SpriteRenderer sr;
+    public GameObject linkedObject;
     public Sprite unpressedPressurePlate;
     public Sprite pressedPressurePlate;
 
@@ -15,7 +14,6 @@ public class PressurePlateScript : NonShrinkableScript
     void Start()
     {
         activated = false;
-        sr = gameObject.GetComponent<SpriteRenderer>();
         
 
     }
@@ -25,18 +23,23 @@ public class PressurePlateScript : NonShrinkableScript
     {
         if (activated)
         {
-            linkedDoor.opened = true;
+            if (linkedObject.name == "Growing Vine")
+            {
+                linkedObject.SendMessage("Activate");
+            }
         }
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        activated = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = pressedPressurePlate;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        activated = false;
         gameObject.GetComponent<SpriteRenderer>().sprite = unpressedPressurePlate;
     }
 }
