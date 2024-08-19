@@ -41,11 +41,14 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
-    uniqueID: 416103181
+    uniqueID: 766758037
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Flowers
     uniqueID: 3542531895
+    locked: 0
+  - name: Shrooms
+    uniqueID: 493847471
     locked: 0
