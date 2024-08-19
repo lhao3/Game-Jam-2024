@@ -1167,6 +1167,10 @@ PrefabInstance:
       propertyPath: shrinkToggle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 683752293967895151, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
+      propertyPath: laserCooldownTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4804628966433205814, guid: 8ad0ac86ebdc2374bbf47581fad725bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.865
