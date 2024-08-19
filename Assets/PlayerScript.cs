@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] public float laserX;
     [SerializeField] public float laserY;
+    [SerializeField] private float laserCooldownTime = 1.0f;
+
 
     public float xScale = 1f;
     public float yScale = 1f;
@@ -32,13 +34,18 @@ public class PlayerScript : MonoBehaviour
     private float horizontalMovement;
     private Rigidbody2D rb2D;
     private bool hasJumped = false;
-    private bool isGrounded = true; 
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
     private Vector3 laserPosition;
     private SpriteRenderer laserSprite;
     private Animator animator;
-    public bool shrinkToggle = true;
+    public bool shrinkToggle = true; 
+    private float lastShootTime = -Mathf.Infinity;
+    public Vector2 boxSize;
+    public float castDistance;
+    public LayerMask groundLayer;
+
+
 
 
     // Start is called before the first frame update
@@ -56,19 +63,29 @@ public class PlayerScript : MonoBehaviour
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
 
+
+        if (Input.GetKeyDown(KeyCode.W) && isOnGround())
+        {
+            hasJumped = true;
+            Debug.Log("Player has jumped");
+
+        }
+
+
         if (animator != null)
         {
             if (horizontalMovement == 0)
             {
                 animator.SetFloat("Speed", 0);
             }    
-            else if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 playerSprite.flipX = true;
                 animator.SetFloat("Speed", 0.5f);
                 Debug.Log("Pressed A");
+                Debug.Log("Grounded: " + isOnGround());
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 playerSprite.flipX = false;
                 animator.SetFloat("Speed", 0.5f);
@@ -76,14 +93,8 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        //isGrounded = floorCollider.IsTouching(floorFilter);
 
-        if(!hasJumped && Input.GetKeyDown(KeyCode.W) && isGrounded)
-        {
-            hasJumped = true; 
-        }
-
-        if (Input.GetKeyDown(KeyCode.P) && size != "grown")
+        if (Input.GetKeyDown(KeyCode.Q) && size != "grown")
         {
 
             if (size.Equals("shrunk"))
@@ -99,7 +110,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && size != "shrunk")
+        if (Input.GetKeyDown(KeyCode.E) && size != "shrunk")
         {
 
             if (size.Equals("grown"))
@@ -115,44 +126,24 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-           shrinkToggle = !shrinkToggle;
+           shrinkToggle = true;
            Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            shrinkToggle = false;
+            Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            bool isFlipped = playerSprite.flipX;
-
-            if (isFlipped)
+            if (Time.time >= lastShootTime + laserCooldownTime)
             {
-                
-                laserPosition = new Vector3(transform.position.x - laserX, transform.position.y + laserY, 0);
-
-            }
-            else
-            {
-                
-                laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
- 
-            }
-      
-            GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
-            SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
-            instantiatedLaser.transform.SetParent(transform);
-           
-
-            if (playerSprite.flipX)
-            {
-                instantiatedLaser.transform.localScale = new Vector3(-Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
-                instantiatedLaser.transform.right = Vector3.left;
-
-            }
-            else
-            {
-                instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
-                instantiatedLaser.transform.right = Vector3.right;
+                ShootLaser();
+                lastShootTime = Time.time;
             }
 
             
@@ -168,17 +159,79 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
+
+    }
+
+    public bool isOnGround()
+    {
+        if(Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector3 center = transform.position - (transform.up * castDistance / 2);
+        //Gizmos.DrawWireCube(center, boxSize);
+        Gizmos.DrawCube(transform.position - transform.up * castDistance, boxSize);
+
+
     }
 
     private void FixedUpdate()
     {
         rb2D.velocity = new Vector2(horizontalMovement * movementSpeed, rb2D.velocity.y);
-        if (hasJumped)
+        if (isOnGround() && hasJumped)
         {
+            
             hasJumped = false;
             rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+ 
+        }
+
+    }
+
+    private void ShootLaser()
+    {
+        bool isFlipped = playerSprite.flipX;
+
+        if (isFlipped)
+        {
+
+            laserPosition = new Vector3(transform.position.x - laserX, transform.position.y + laserY, 0);
+
+        }
+        else
+        {
+
+            laserPosition = new Vector3(transform.position.x + laserX, transform.position.y + laserY, 0);
+
+        }
+
+        GameObject instantiatedLaser = Instantiate(laser, laserPosition, transform.rotation);
+        SpriteRenderer laserSpriteRenderer = instantiatedLaser.GetComponent<SpriteRenderer>();
+        instantiatedLaser.transform.SetParent(transform);
+
+
+        if (playerSprite.flipX)
+        {
+            instantiatedLaser.transform.localScale = new Vector3(-Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+            instantiatedLaser.transform.right = Vector3.left;
+
+        }
+        else
+        {
+            instantiatedLaser.transform.localScale = new Vector3(Mathf.Abs(instantiatedLaser.transform.localScale.x), instantiatedLaser.transform.localScale.y, instantiatedLaser.transform.localScale.z);
+            instantiatedLaser.transform.right = Vector3.right;
         }
     }
+
 
     public void SetScaling(Vector3 targetSize, float factor)
     {
@@ -188,25 +241,6 @@ public class PlayerScript : MonoBehaviour
         scaleFactor = factor;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            if (collision.contacts[0].normal.y > 0.5f)
-            {
-                isGrounded = true;
-            }
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-   
-            isGrounded = false;            
-        }
-    }
 
     public bool GetShrinkToggle()
     {

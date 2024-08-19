@@ -10,11 +10,14 @@ public class LaserScript : MonoBehaviour
     public LayerMask layersToHit;
     private Collider2D collided;
     private SpriteRenderer laserSprite;
+    private HashSet<Collider2D> interactedColliders = new HashSet<Collider2D>();
+
 
     // Start is called before the first frame update
     void Start()
     {
         laserSprite = GetComponent<SpriteRenderer>();
+        interactedColliders.Clear();
 
         if (laserSprite == null)
         {
@@ -51,13 +54,24 @@ public class LaserScript : MonoBehaviour
             float hitDistance = hit.distance;
             transform.localScale = new Vector3(hitDistance, transform.localScale.y, transform.localScale.z);
         }
-
+        
         if (hit.collider.tag == "Shrinkable")
+        {
+            if (!interactedColliders.Contains(hit.collider))
+            {
+                interactedColliders.Add(hit.collider);
+                collided = hit.collider;
+                TriggerScaling();
+            }
+        }
+
+       /* if (hit.collider.tag == "Shrinkable")
         {
             collided = hit.collider;
             TriggerScaling();
+
     
-        }
+        }*/
 
         if(hit.collider != null)
         {
