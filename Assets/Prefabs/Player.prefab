@@ -175,9 +175,9 @@ MonoBehaviour:
   scaleSpeed: 10
   laser: {fileID: 3508488581649257761, guid: c981e773268fd444a814ad468b722ea5, type: 3}
   playerSprite: {fileID: 6291065596087083182}
-  laserSprite: {fileID: 3626916397498700004, guid: 5a75a225fdd589b4388248359e3b2dc9, type: 3}
   laserX: 0.1
   laserY: 0.2
+  laserCooldownTime: 1
   xScale: 1
   yScale: 1
   movementSpeed: 6
@@ -199,6 +199,12 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  shrinkToggle: 1
+  boxSize: {x: 0.66, y: 0.15}
+  castDistance: 0.62
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!95 &1426531492060856117
 Animator:
   serializedVersion: 5
@@ -209,7 +215,7 @@ Animator:
   m_GameObject: {fileID: 8393809921727257352}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -1955836606698913233, guid: 524db0f216206bf4f9f82b06339ec0c9, type: 3}
+  m_Controller: {fileID: 9100000, guid: a199d9ea2856a11459cafaf0792e33d8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
