@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -43,7 +45,12 @@ public class PlayerScript : MonoBehaviour
     public float castDistance;
     public LayerMask groundLayer;
     public Vector3 pos;
- 
+    public bool isAlive;
+
+    private void Awake()
+    {
+        isAlive = true; 
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +66,12 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
+
+        if (!isAlive)
+        {
+            return;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.W) && isOnGround())
         {
@@ -213,10 +226,32 @@ public class PlayerScript : MonoBehaviour
         return isRoom;
     }
 
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Lethal"))
+        {
+            Debug.Log("Collision detected with: " + collision.gameObject.name);
+            playerSprite.color = Color.grey;
+            isAlive = false; 
+            rb2D.velocity = Vector2.zero; // Stop all movement
+            StartCoroutine(ReloadSceneAfterDelay());
+        }
+    }
+    private IEnumerator ReloadSceneAfterDelay()
+    {
+        Debug.Log("Starting coroutine to reload scene.");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Reloading scene.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     private void FixedUpdate()
     {
+        if (!isAlive)
+        {
+            return;
+        }
+
         rb2D.velocity = new Vector2(horizontalMovement * movementSpeed, rb2D.velocity.y);
         if (isOnGround() && hasJumped)
         {
