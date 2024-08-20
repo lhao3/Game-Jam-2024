@@ -149,3 +149,11 @@ MonoBehaviour:
   VineStage3: {fileID: 21300000, guid: 1fb365bcabbac45c8ba7f3c2d1264000, type: 3}
   VineStage4: {fileID: 21300000, guid: ccb380795cdd04cdeaee8a75afdfaa81, type: 3}
   targetTime: -11.472813
+  boxCollider: {fileID: 5677319646223442012}
+  firstSizeX: 0.32
+  firstSizeY: 0.25
+  secondSizeY: 0.36
+  thirdSizeY: 0.5
+  fourthSizeY: 0.64
+  offsetX: 0
+  offsetY: 0
