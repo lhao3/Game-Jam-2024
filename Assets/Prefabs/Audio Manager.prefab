@@ -44,7 +44,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05353f9a02703104dbfd196f81d68e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: levelmusic
+    clip: {fileID: 8300000, guid: db97a28b749844145ad1c811efc54e1d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: mainmenumusic
+    clip: {fileID: 8300000, guid: 0dff76189bc747c42b02ad5dc1dbdbdc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: 8cf5113e42f18fc47b7e6c1b8b5f3214, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jump
+    clip: {fileID: 8300000, guid: 2929f6970d1cb4343bf3c13c92f84398, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: menubutton
+    clip: {fileID: 8300000, guid: 2ecc864c8941fb246812439b845f6b13, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shrinkgrowerror
+    clip: {fileID: 8300000, guid: f52e4c0fc21f0714991b927ff7f8974c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shrinkraylargetomedium
+    clip: {fileID: 8300000, guid: c10e79e053b37ed45bcffbdbc4d585c5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shrinkraymediumtolarge
+    clip: {fileID: 8300000, guid: 3a66e46ead1e09d4ba9a3f78c613f137, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shrinkraymediumtosmall
+    clip: {fileID: 8300000, guid: 494f066481c70ac458d69a171bb54fb0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shrinkraysmalltomedium
+    clip: {fileID: 8300000, guid: 6b87e1c4148b70f4f978a2ce19957919, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: laser
+    clip: {fileID: 8300000, guid: 7d3e16eca1a59e94a9c19345d4935aaa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   SFXClips:
   - {fileID: 8300000, guid: 8cf5113e42f18fc47b7e6c1b8b5f3214, type: 3}
   - {fileID: 8300000, guid: 2929f6970d1cb4343bf3c13c92f84398, type: 3}

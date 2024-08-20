@@ -26,4 +26,9 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("Options");
     }
+
+    public void EnterTutorial()
+    {
+        SceneManager.LoadScene("TutorialLevel1");
+    }
 }

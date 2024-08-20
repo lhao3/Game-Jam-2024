@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShrinkableScript : MonoBehaviour
 {
-    public string size;
+
 
     [SerializeField]
     public float maxXSize = 2f; // Max X size
@@ -24,6 +24,7 @@ public class ShrinkableScript : MonoBehaviour
     private Vector3 targetScale;
     private bool scaling = false;
     private float scaleFactor;
+    private string size;
 
 
     // Start is called before the first frame update
