@@ -33,4 +33,3 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 }
-
