@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8143869552052255594}
   - component: {fileID: 5541348893504512864}
   - component: {fileID: 4770994884921385814}
-  - component: {fileID: 1654783445514454363}
   - component: {fileID: 6312500741476066060}
+  - component: {fileID: 8648745104845151968}
   m_Layer: 3
-  m_Name: Rock
+  m_Name: ROCK
   m_TagString: Shrinkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,24 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.7608533}
   m_EdgeRadius: 0
---- !u!114 &1654783445514454363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2475198852494578072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ccb39c5504564bf392835b9fb5cea0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 
-  maxXSize: 2
-  maxYSize: 2
-  minXSize: 0.75
-  minYSize: 0.75
-  scaleSpeed: 1
 --- !u!50 &6312500741476066060
 Rigidbody2D:
   serializedVersion: 4
@@ -177,3 +159,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 5
+--- !u!114 &8648745104845151968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475198852494578072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd4ca38314234fd780849561c8d82ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 
+  maxXSize: 2
+  maxYSize: 2
+  minXSize: 0.5
+  minYSize: 0.5
+  scaleSpeed: 1
