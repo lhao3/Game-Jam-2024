@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &77622271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2724736361986339135, guid: 94e98b96794be954ab31aec5dd60387c, type: 3}
+  m_PrefabInstance: {fileID: 258290865}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05353f9a02703104dbfd196f81d68e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &258290865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -863,6 +874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60aa1b1906bfc3438a2951acca54f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 77622271}
 --- !u!114 &1748132753
 MonoBehaviour:
   m_ObjectHideFlags: 0

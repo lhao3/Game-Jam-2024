@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private string goScreen;
+    public AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,10 @@ public class SceneLoader : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Load(goScreen);
+        if (collision.CompareTag("Player"))
+        {
+            Load(goScreen);
+        }
     }
 
     public string GoScreen()
@@ -28,7 +32,7 @@ public class SceneLoader : MonoBehaviour
         return goScreen;
     }
 
-    public static void Load(string scene)
+    public void Load(string scene)
     {
         SceneManager.LoadScene(scene);
     }

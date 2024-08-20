@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
@@ -10,25 +11,18 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private PlayerScript playerScript;
     [SerializeField] private GameObject options;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private Button quitButton;
     private bool isMenuActive;
 
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+
     }
 
     void Start()
     {
-        
+ 
     }
 
     // Update is called once per frame
@@ -51,6 +45,10 @@ public class GameManagerScript : MonoBehaviour
                 playerScript.EnablePlayerInput();
             }
         }
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            Destroy(gameObject); // Destroy the GameManager object
+        }
     }
 
     public void continuePressed()
@@ -64,8 +62,12 @@ public class GameManagerScript : MonoBehaviour
 
     public void quitPressed()
     {
+        Debug.Log("Quit button pressed.");
         playerScript.EnablePlayerInput();
         Time.timeScale = 1f;
+        Debug.Log("Stopping music");
+        //audioManager.Stop("levelmusic");
+        Debug.Log("Loading Main Menu");
         SceneManager.LoadScene("MainMenu");  //Quit button in pause menu returns to main menu
     }
 
