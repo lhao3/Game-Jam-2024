@@ -665,6 +665,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5277623203980447003, guid: 6221836c481f07449b9e861c444d8113, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277623203980447003, guid: 6221836c481f07449b9e861c444d8113, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277623203980447003, guid: 6221836c481f07449b9e861c444d8113, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960786
+      objectReference: {fileID: 0}
     - target: {fileID: 8526153232127753455, guid: 6221836c481f07449b9e861c444d8113, type: 3}
       propertyPath: m_Name
       value: LethalObject
@@ -675,11 +687,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091069553560454934, guid: 6221836c481f07449b9e861c444d8113, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9182
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 9091069553560454934, guid: 6221836c481f07449b9e861c444d8113, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.48
+      value: -9.19
       objectReference: {fileID: 0}
     - target: {fileID: 9091069553560454934, guid: 6221836c481f07449b9e861c444d8113, type: 3}
       propertyPath: m_LocalPosition.z
