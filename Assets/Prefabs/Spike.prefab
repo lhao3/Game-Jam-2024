@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2190761622558292699}
   - component: {fileID: 3476322128396214675}
-  - component: {fileID: 1446278283147879892}
-  - component: {fileID: 5629777975414781435}
+  - component: {fileID: 5909822585760780414}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Lethal
@@ -86,21 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1446278283147879892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985823526639698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5338eebc2f8494d8b418862f44dd4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawn: 4
---- !u!60 &5629777975414781435
-PolygonCollider2D:
+--- !u!61 &5909822585760780414
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -141,24 +127,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.022627078, y: 0.07835705}
-      - {x: 0.00049819215, y: 0.09756364}
-      - {x: -0.016402274, y: 0.08073116}
-      - {x: -0.048632625, y: 0.019733164}
-      - {x: -0.0640336, y: -0.015060218}
-      - {x: -0.07442215, y: -0.03458531}
-      - {x: -0.07590773, y: -0.044122644}
-      - {x: -0.077851616, y: -0.052431967}
-      - {x: -0.084090345, y: -0.079272375}
-      - {x: -0.05264294, y: -0.08205703}
-      - {x: -0.02772517, y: -0.080457725}
-      - {x: -0.0038308608, y: -0.08037885}
-      - {x: 0.016029317, y: -0.08071906}
-      - {x: 0.050978128, y: -0.082468316}
-      - {x: 0.08059114, y: -0.079675734}
-      - {x: 0.080597654, y: -0.056404795}
-      - {x: 0.058892906, y: -0.00520242}
-      - {x: 0.038437326, y: 0.03926451}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
