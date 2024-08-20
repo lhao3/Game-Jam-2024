@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2190761622558292699}
   - component: {fileID: 3476322128396214675}
-  - component: {fileID: 1446278283147879892}
-  - component: {fileID: 5629777975414781435}
+  - component: {fileID: 5909822585760780414}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Lethal
@@ -86,21 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1446278283147879892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985823526639698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5338eebc2f8494d8b418862f44dd4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawn: 4
---- !u!60 &5629777975414781435
-PolygonCollider2D:
+--- !u!61 &5909822585760780414
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -135,18 +121,12 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.16, y: 0.16}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.0044115037, y: 0.50570565}
-      - {x: 0.005948454, y: 0.50071526}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.49345753, y: -0.49966833}
-      - {x: 0.061013006, y: 0.38969156}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
