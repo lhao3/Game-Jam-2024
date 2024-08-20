@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d3e6ac05ea00b4f8e52287a29bdfe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicName: levelmusic
+  musicName: 
 --- !u!4 &1121733576
 Transform:
   m_ObjectHideFlags: 0
