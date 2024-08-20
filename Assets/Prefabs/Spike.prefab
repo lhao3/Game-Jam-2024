@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2190761622558292699}
   - component: {fileID: 3476322128396214675}
-  - component: {fileID: 5909822585760780414}
+  - component: {fileID: 5022182256435191640}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Lethal
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5909822585760780414
-BoxCollider2D:
+--- !u!60 &5022182256435191640
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -127,6 +127,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.005680237, y: 0.08040019}
+      - {x: -0.06990502, y: -0.046811417}
+      - {x: -0.08, y: -0.08}
+      - {x: 0.08, y: -0.08}
+      - {x: 0.055221435, y: -0.02320142}
+      - {x: 0.006139124, y: 0.08040019}
+  m_UseDelaunayMesh: 0
