@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 
@@ -46,10 +47,12 @@ public class PlayerScript : MonoBehaviour
     public LayerMask groundLayer;
     public Vector3 pos;
     public bool isAlive;
+    private bool inputActive;
 
     private void Awake()
     {
-        isAlive = true; 
+        isAlive = true;
+        inputActive = true;
     }
 
     // Start is called before the first frame update
@@ -67,7 +70,7 @@ public class PlayerScript : MonoBehaviour
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
 
-        if (!isAlive)
+        if (!isAlive || !inputActive)
         {
             return;
         }
@@ -247,7 +250,7 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isAlive)
+        if (!isAlive || !inputActive)
         {
             return;
         }
@@ -353,10 +356,19 @@ private bool IsBlockingGrowth(Collider2D collider)
 
     return isBlockingX && isBlockingY;
 }
+    public void DisablePlayerInput()
+    {
+        inputActive = false;
+    }
+
+    public void EnablePlayerInput()
+    {
+        inputActive = true;
+    }
 
 
 
-private bool CheckStuck()
+    private bool CheckStuck()
 {
     // Define directions to check for stuck state
     Vector2[] directions = new Vector2[]
