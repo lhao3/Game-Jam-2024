@@ -25,7 +25,7 @@ public class ButtonInteraction : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E) && !hasMoved)
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.F) && !hasMoved)
         {
             hasMoved = true; // Set the flag to true to prevent further movement
         }

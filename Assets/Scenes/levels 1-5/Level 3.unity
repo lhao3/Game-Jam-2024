@@ -2115,6 +2115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike
       objectReference: {fileID: 0}
+    - target: {fileID: 1446278283147879892, guid: 69c3b5cea3658475282008a12f0ac672, type: 3}
+      propertyPath: respawn
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2190761622558292699, guid: 69c3b5cea3658475282008a12f0ac672, type: 3}
       propertyPath: m_LocalScale.x
       value: 7.113463
