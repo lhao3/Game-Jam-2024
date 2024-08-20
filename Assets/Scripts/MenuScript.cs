@@ -35,7 +35,14 @@ public class MenuScript : MonoBehaviour
 
     public void EnterTutorial()
     {
+        StartCoroutine(EnterTutorialCoroutine());
+        
+    }
+
+    private IEnumerator EnterTutorialCoroutine()
+    {
         //audioManager.Stop("mainmenumusic");
+        yield return null;
         SceneManager.LoadScene("TutorialLevel1");
     }
 }

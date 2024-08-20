@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] public float laserY;
     [SerializeField] private float laserCooldownTime = 1.0f;
     [SerializeField] private GameObject boxCheck;
+    [SerializeField] private AudioManager audioManager;
 
     public float xScale = 1f;
     public float yScale = 1f;
@@ -76,9 +77,10 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.W) && isOnGround())
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround())  //jump mechanic
         {
             hasJumped = true;
+            audioManager.Play("jump");
             Debug.Log("Player has jumped");
         }
 
@@ -103,7 +105,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && size != "grown")
+        if (Input.GetKeyDown(KeyCode.W) && size != "grown")  //grows player
         {
 
             if (!CollisionCheck())
@@ -124,7 +126,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && size != "shrunk")
+        if (Input.GetKeyDown(KeyCode.S) && size != "shrunk")  //shrinks player 
         {
             if (size.Equals("grown"))
             {
@@ -139,23 +141,24 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.E))  //sets laser to shrink mode
         {
             shrinkToggle = true;
             Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Q))  //sets laser to grow mode
         {
             shrinkToggle = false;
             Debug.Log($"Shrink Toggle is now: {shrinkToggle}");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return))  //fires laser
         {
             if (Time.time >= lastShootTime + laserCooldownTime)
             {
                 ShootLaser();
+                audioManager.Play("laser");
                 lastShootTime = Time.time;
             }
         }
