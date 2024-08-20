@@ -62,13 +62,27 @@ public class GameManagerScript : MonoBehaviour
 
     public void quitPressed()
     {
-        Debug.Log("Quit button pressed.");
+        StartCoroutine(QuitPressedCoroutine());
+    }
+
+    private IEnumerator QuitPressedCoroutine()
+    {
+        // Ensure the player input is enabled and time scale is reset
         playerScript.EnablePlayerInput();
         Time.timeScale = 1f;
-        Debug.Log("Stopping music");
-        //audioManager.Stop("levelmusic");
-        Debug.Log("Loading Main Menu");
-        SceneManager.LoadScene("MainMenu");  //Quit button in pause menu returns to main menu
+
+        // Stop the music
+        if (audioManager != null)
+        {
+            //audioManager.Stop("levelmusic");
+        }
+
+        // Optionally, wait for a frame or two to ensure the music stop is processed
+         yield return null;
+
+
+        // Load the Main Menu scene
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

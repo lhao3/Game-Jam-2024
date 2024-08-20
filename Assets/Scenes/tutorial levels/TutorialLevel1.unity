@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1624240471571597366, guid: 2867cc368fcb34343b29c1eef6caef3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5823253352530721313, guid: 2867cc368fcb34343b29c1eef6caef3f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5998377
@@ -2363,7 +2367,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5075527366894049091, guid: a9f125f7291b00c4782e626111af434c, type: 3}
       propertyPath: goScreen
-      value: TutorialLevel2
+      value: TutorialLevel3
       objectReference: {fileID: 0}
     - target: {fileID: 5322192072241727092, guid: a9f125f7291b00c4782e626111af434c, type: 3}
       propertyPath: m_Name
