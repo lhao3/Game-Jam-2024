@@ -80,7 +80,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround())  //jump mechanic
         {
             hasJumped = true;
-            //audioManager.Play("jump");
+            audioManager.Play("jump");
             Debug.Log("Player has jumped");
         }
 
@@ -158,7 +158,7 @@ public class PlayerScript : MonoBehaviour
             if (Time.time >= lastShootTime + laserCooldownTime)
             {
                 ShootLaser();
-                //audioManager.Play("laser");
+                audioManager.Play("laser");
                 lastShootTime = Time.time;
             }
         }

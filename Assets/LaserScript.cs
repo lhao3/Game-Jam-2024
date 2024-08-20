@@ -39,6 +39,7 @@ public class LaserScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //laserSprite.transform.localScale = new Vector3(laserSprite.transform.localScale.x * 3, laserSprite.transform.localScale.y, laserSprite.transform.localScale.z);
         Vector2 dir = transform.right;
         laserLength =  laserSprite.bounds.size.x;
         Debug.DrawRay(transform.position, dir * laserLength, Color.red);
@@ -46,7 +47,7 @@ public class LaserScript : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, laserLength, layersToHit);
         if (hit.collider == null)
         {
-            transform.localScale = new Vector3(3f, transform.localScale.y, 1);
+            transform.localScale = new Vector3(20f, transform.localScale.y, 1);
             return;
         }
         else
