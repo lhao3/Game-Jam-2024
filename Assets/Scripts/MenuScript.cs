@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
+    [SerializeField] public AudioManager audioManager;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+
+    }
     void Start()
     {
         
@@ -29,6 +35,7 @@ public class MenuScript : MonoBehaviour
 
     public void EnterTutorial()
     {
+        //audioManager.Stop("mainmenumusic");
         SceneManager.LoadScene("TutorialLevel1");
     }
 }
