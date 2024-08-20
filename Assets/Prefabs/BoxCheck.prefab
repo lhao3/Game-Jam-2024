@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   normalX: 0.96
   normalY: 1.15
   yOffset: 0.75
