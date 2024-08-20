@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShrinkableWebScript : MonoBehaviour
 {
-    public string size;
+
 
     [SerializeField]
     public float maxXSize = 2f; // Max X size
@@ -24,14 +24,14 @@ public class ShrinkableWebScript : MonoBehaviour
     private Vector3 targetScale;
     private bool scaling = false;
     private float scaleFactor;
+    private string size;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        print("works");
         size = "normal";
-
+       
         normalScale = transform.localScale;
 
     }
@@ -39,20 +39,7 @@ public class ShrinkableWebScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (size == "normal" || size == "large")
-            {
-                SetScaling(minSize, 0.5f); // Shrink to minSize
-                size = "small";
-            }
-            else if (size == "small")
-            {
-                SetScaling(maxSize, 1.5f); // Grow to maxSize
-                size = "large";
-            }
-        }*/
-        if (Input.GetKeyDown(KeyCode.P) && size != "large")
+       /* if (Input.GetKeyDown(KeyCode.P) && size != "large")
         {
 
             if (size.Equals("small"))
@@ -82,7 +69,7 @@ public class ShrinkableWebScript : MonoBehaviour
                 Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
                 SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
             }
-        }
+        }*/
 
         if (scaling)
         {
@@ -94,6 +81,42 @@ public class ShrinkableWebScript : MonoBehaviour
             {
                 transform.localScale = targetScale;
                 scaling = false;
+            }
+        }
+    }
+
+    public void Shrink()
+    {
+        if(size != "small")
+        {
+            if (size.Equals("large"))
+            {
+                size = "normal";
+                SetScaling(normalScale, 1f);   //shrink back to normal size if grown
+            }
+            else
+            {
+                size = "small";
+                Vector3 shrunkenScale = new Vector3(minXSize, minYSize, 1f);
+                SetScaling(shrunkenScale, 0.5f);    //shrink to min size if not grown
+            }
+        }
+    }
+
+    public void Grow()
+    {
+        if(size != "large")
+        {
+            if (size.Equals("small"))
+            {
+                size = "normal";
+                SetScaling(normalScale, 1f);   //grow back to normal size if shrunken
+            }
+            else
+            {
+                size = "large";
+                Vector3 grownScale = new Vector3(maxXSize, maxYSize, 1f);
+                SetScaling(grownScale, 1.5f);   //grow to max size if not shrunken
             }
         }
     }
@@ -111,6 +134,8 @@ public class ShrinkableWebScript : MonoBehaviour
     {
         return true;
     }
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
