@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5248447279584280574}
   - component: {fileID: 1406021102855885375}
   - component: {fileID: 2852276949588167237}
+  - component: {fileID: 8093173826411789595}
   m_Layer: 0
   m_Name: Spider Web
   m_TagString: Untagged
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7136528146867654705}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c046f016e921342159bdc94cfb3dda59, type: 3}
   m_Name: 
@@ -177,3 +178,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.48344624, y: 0.5032053}
   m_EdgeRadius: 0
+--- !u!114 &8093173826411789595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136528146867654705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccb39c5504564bf392835b9fb5cea0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxXSize: 2
+  maxYSize: 2
+  minXSize: 0.5
+  minYSize: 0.5
+  scaleSpeed: 1
